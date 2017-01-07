@@ -16,7 +16,7 @@ Please make sure that you don't have database called categories in your system.
 ## Running in development
 
 During development you can use the `npm start` command to run the
-application through nodemon.
+application through nodemon. Application use port 4000, and database use port 5432
 
 ## API docs
 
