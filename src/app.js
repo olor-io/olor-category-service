@@ -9,6 +9,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/api/category', db.getAllCategories);
 app.get('/api/category/:id', db.getSingleCategory);
+app.get('/api/version', db.getVersion);
 
 module.exports = router;
 module.exports = app;

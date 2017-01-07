@@ -29,3 +29,11 @@ INSERT INTO category (ID, href)
          (17, 'MDE3.pdf'),
          (18, 'MDE4.pdf'),
          (19, 'MDE5.pdf');
+
+CREATE TABLE version (
+  service VARCHAR PRIMARY KEY,
+  version INTEGER
+);
+
+INSERT INTO version (service, version)
+  VALUES ('master', 1);

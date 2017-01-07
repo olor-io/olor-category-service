@@ -11,7 +11,8 @@ var db = pgp(connectionString);
 // add query functions
 module.exports = {
   getAllCategories: getAllCategories,
-  getSingleCategory: getSingleCategory
+  getSingleCategory: getSingleCategory,
+  getVersion: getVersion
 };
 
 function getAllCategories(req, res, next) {
@@ -38,6 +39,21 @@ function getSingleCategory(req, res, next) {
           status: 'success',
           data: data,
           message: 'Retrieved ONE category'
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+
+function getVersion(req, res, next) {
+  db.any('select * from version')
+    .then(function (data) {
+      res.status(200)
+        .json({
+          status: 'success',
+          data: data,
+          message: 'Retrieved categories service version'
         });
     })
     .catch(function (err) {

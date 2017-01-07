@@ -24,3 +24,4 @@ URL | HTTP Verb | Action
 --- | --------- | ------
 /api/category | GET | Every category IDs and links
 /api/category/:id | GET | Category by single ID
+/api/version | GET | Get category-service version
