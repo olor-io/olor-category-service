@@ -1,7 +1,7 @@
-# community-app-category-service
+# Community-app-category-service
 
 Backend API used to manage and send category icons to community-app. Works mainly as
-a relay backend service, sending and receiving data from other microservices.
+a relay backend service, sending data and icons to other microservices.
 
 - [Development](#development)
   - [Running in development](#running-in-development)
