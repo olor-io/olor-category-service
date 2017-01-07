@@ -1,1 +1,27 @@
-# community-app-category-service
+# communityapp-category
+
+Backend API used to manage and send category icons to community-app. Works mainly as
+a relay backend service, sending and receiving data from other microservices.
+
+- [Development](#development)
+  - [Running in development](#running-in-development)
+  - [API docs](#api-docs)
+
+# Development
+
+The application requires a PostgreSQL database to function.
+Run 'psql -f categories.sql' for new database
+Please make sure that you don't have database called categories in your system.
+
+## Running in development
+
+During development you can use the `npm start` command to run the
+application through nodemon.
+
+## API docs
+
+URL | HTTP Verb | Action
+--- | --------- | ------
+
+/api/category | GET | Every category IDs and links
+/api/category/:id | GET | Category by single ID
