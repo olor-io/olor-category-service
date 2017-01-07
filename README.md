@@ -1,4 +1,4 @@
-# communityapp-category
+# community-app-category-service
 
 Backend API used to manage and send category icons to community-app. Works mainly as
 a relay backend service, sending and receiving data from other microservices.
@@ -10,7 +10,7 @@ a relay backend service, sending and receiving data from other microservices.
 # Development
 
 The application requires a PostgreSQL database to function.
-Run 'psql -f categories.sql' for new database
+Run 'psql -f categories.sql' for new database.
 Please make sure that you don't have database called categories in your system.
 
 ## Running in development
@@ -22,6 +22,5 @@ application through nodemon. Application use port 4000, and database use port 54
 
 URL | HTTP Verb | Action
 --- | --------- | ------
-
 /api/category | GET | Every category IDs and links
 /api/category/:id | GET | Category by single ID
