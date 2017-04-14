@@ -1,0 +1,46 @@
+{
+  "name": "olor-category-service",
+  "version": "0.1.0",
+  "description": "Backend API used to manage categories and event related content for olor.",
+  "main": "./src/index.js",
+  "directories": {
+    "src": "src"
+  },
+  "engines": {
+    "node": "7.4.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rovaniemi/community-app-category-service.git"
+  },
+  "author": "Mauri Karlin, Valentin Abramenkov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rovaniemi/community-app-category-service/issues"
+  },
+  "homepage": "https://github.com/rovaniemi/community-app-category-service#readme",
+  "dependencies": {
+    "bluebird": "^3.3.4",
+    "body-parser": "~1.15.2",
+    "cookie-parser": "~1.4.3",
+    "errorhandler": "1.5.x",
+    "express": "~4.14.0",
+    "express-graceful-exit": "0.3.x",
+    "morgan": "~1.7.0",
+    "lodash": "4.17.x",
+    "pg-promise": "^3.2.3",
+    "serve-favicon": "~2.3.0"
+  },
+  "devDependencies": {
+    "debug": "~2.2.0",
+    "eslint": "^3.15.0",
+    "jscs": "^3.0.7",
+    "nodemon": "^1.3.7"
+  },
+  "scripts": {
+    "start": "source .env && nodemon --watch ./src -e js src/index.js",
+    "debug": "source .env && node-debug --debug-brk=0 src/index.js",
+    "jscs": "jscs ./src ./test",
+    "eslint": "eslint --ext .js ./src ./test"
+  }
+}
