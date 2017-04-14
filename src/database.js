@@ -1,25 +1,24 @@
 var promise = require('bluebird');
+var logger = require('./logger')(__filename);
 
 var databaseConfig = {
     promiseLib: promise,
     error: (error, err) => {
         if (err.cn) {
-            // A connection-related error;
-            // Connections are reported back with the password hashed,
-            // for safe errors logging, without exposing passwords.
-            console.log("Cn: ", err.cn);
-            console.log("Event: ", error.message || error);
+            // A connection-related error
+            logger.error('Cn: ', err.cn);
+            logger.error('Event: ', error.message || error);
         }
     }
 };
 
-var pgp = require("pg-promise")(databaseConfig);
+var pgp = require('pg-promise')(databaseConfig);
 var db = null;
 
 // This function can be called as many times as needed but only
 // on the first the pg-promise connection will be initialized
 function connect() {
-    if(db === null) {
+    if (db === null) {
         db = pgp(process.env.DATABASE_URL);
     }
 
@@ -27,7 +26,7 @@ function connect() {
     .then(obj => {
         obj.done();
     }).catch(error => {
-        console.log("Error: ", error.message || error);
+        logger.error('Error: ', error.message || error);
     });
 
     return {

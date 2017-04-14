@@ -170,7 +170,7 @@ function startApp() {
     return {
         app: app,
         server: server,
-        db: db,
+        db: db
     };
 }
 

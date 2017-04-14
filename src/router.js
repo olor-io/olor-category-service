@@ -1,5 +1,4 @@
 var express = require('express');
-var promise = require('bluebird');
 var Database = require('./database').connect();
 
 function createRouter() {
@@ -11,7 +10,7 @@ function createRouter() {
         url: '/category',
         callback: function getAllCategories(req, res, next) {
             db.any('select * from category')
-            .then(function (data) {
+            .then((data) => {
                 res.status(200)
                 .json({
                     status: 'success',
@@ -19,7 +18,7 @@ function createRouter() {
                     message: 'Retrieved ' + data.length + ' categories'
                 });
             })
-            .catch(function (err) {
+            .catch((err) => {
                 return next(err);
             });
         }
@@ -31,7 +30,7 @@ function createRouter() {
         callback: function getSingleCategory(req, res, next) {
             var categoryId = parseInt(req.params.id);
             db.one('select * from category where id = $1', categoryId)
-            .then(function (data) {
+            .then((data) => {
                 res.status(200)
                 .json({
                     status: 'success',
@@ -39,26 +38,7 @@ function createRouter() {
                     message: 'Retrieved ONE category'
                 });
             })
-            .catch(function (err) {
-                return next(err);
-            });
-        }
-    });
-
-    createRoute(router, {
-        method: 'get',
-        url: '/version',
-        callback: function getVersion(req, res, next) {
-            db.any('select * from version')
-            .then(function (data) {
-                res.status(200)
-                .json({
-                  status: 'success',
-                  data: data,
-                  message: 'Retrieved categories service version'
-                });
-            })
-            .catch(function (err) {
+            .catch((err) => {
                 return next(err);
             });
         }
