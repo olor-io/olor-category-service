@@ -18,7 +18,7 @@ Add environment variables to .env. Example config is found in .env-sample.
 ### Setup database
 
 The application requires a PostgreSQL database to function.
-While in project root, run `psql -f ./src/init-databas.sql` to create a new database.
+While in project root, run `psql -f ./src/init-database.sql` to create a new database.
 Please make sure that you don't have database called categories on your system.
 
 ### Install npm modules
@@ -34,5 +34,5 @@ The application uses the parameters provided in .env.
 
 URL | HTTP Verb | Action
 --- | --------- | ------
-/api/category | GET | All categories
-/api/category/:id | GET | Category by a single Id
+/api/v1/category | GET | All categories
+/api/v1/category/:id | GET | Category by a single Id
