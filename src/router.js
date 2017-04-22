@@ -1,62 +1,58 @@
-var promise = require('bluebird');
+var express = require('express');
+var Database = require('./database').connect();
 
-var options = {
-  promiseLib: promise
-};
+function createRouter() {
+    var router = express.Router();
+    var db = Database.db;
 
-var pgp = require('pg-promise')(options);
-var connectionString = 'postgres://localhost:5432/categories';
-var db = pgp(connectionString);
-
-// add query functions
-module.exports = {
-  getAllCategories: getAllCategories,
-  getSingleCategory: getSingleCategory,
-  getVersion: getVersion
-};
-
-function getAllCategories(req, res, next) {
-  db.any('select * from category')
-    .then(function (data) {
-      res.status(200)
-        .json({
-          status: 'success',
-          data: data,
-          message: 'Retrieved ALL categories'
-        });
-    })
-    .catch(function (err) {
-      return next(err);
+    createRoute(router, {
+        method: 'get',
+        url: '/category',
+        callback: function getAllCategories(req, res, next) {
+            db.any('select * from category')
+            .then((data) => {
+                res.status(200)
+                .json({
+                    status: 'success',
+                    data: data,
+                    message: 'Retrieved ' + data.length + ' categories'
+                });
+            })
+            .catch((err) => {
+                return next(err);
+            });
+        }
     });
+
+    createRoute(router, {
+        method: 'get',
+        url: '/category/:id',
+        callback: function getSingleCategory(req, res, next) {
+            var categoryId = parseInt(req.params.id);
+            db.one('select * from category where id = $1', categoryId)
+            .then((data) => {
+                res.status(200)
+                .json({
+                    status: 'success',
+                    data: data,
+                    message: 'Retrieved ONE category'
+                });
+            })
+            .catch((err) => {
+                return next(err);
+            });
+        }
+    });
+
+    return router;
 }
 
-function getSingleCategory(req, res, next) {
-  var categoryID = parseInt(req.params.id);
-  db.one('select * from category where id = $1', categoryID)
-    .then(function (data) {
-      res.status(200)
-        .json({
-          status: 'success',
-          data: data,
-          message: 'Retrieved ONE category'
-        });
-    })
-    .catch(function (err) {
-      return next(err);
-    });
+// TODO:
+//  Implement roles to opts
+function createRoute(router, opts) {
+    var routeParams = [opts.url];
+    routeParams.push(opts.callback);
+    router[opts.method].apply(router, routeParams);
 }
 
-function getVersion(req, res, next) {
-  db.any('select * from version')
-    .then(function (data) {
-      res.status(200)
-        .json({
-          status: 'success',
-          data: data,
-          message: 'Retrieved categories service version'
-        });
-    })
-    .catch(function (err) {
-      return next(err);
-    });
-}
+module.exports = createRouter;

@@ -1,5 +1,9 @@
 DROP DATABASE IF EXISTS categories;
-CREATE DATABASE categories;
+CREATE DATABASE categories
+  lc_collate 'fi_FI.UTF-8'
+  lc_ctype 'fi_FI.UTF-8'
+  encoding 'UTF8'
+  template template0;
 
 \c categories;
 
